@@ -3,685 +3,1115 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Zainab Sohail — Research Profile</title>
+  <title>Zainab Sohail | AI Researcher</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #0f1117;
-      --surface: #181c27;
-      --surface2: #1f2436;
-      --accent: #6c8ef7;
-      --accent2: #a78bfa;
-      --text: #e2e8f0;
-      --muted: #8892a4;
-      --border: #2a3047;
-      --tag-bg: #1e2a45;
-      --tag-text: #93b4ff;
-      --radius: 12px;
+      --bg:       #050b15;
+      --bg2:      #080f1e;
+      --surface:  #0c1525;
+      --surface2: #101c30;
+      --cyan:     #00c8f0;
+      --cyan2:    #00e5ff;
+      --cyan-dim: rgba(0,200,240,0.12);
+      --cyan-border: rgba(0,200,240,0.25);
+      --text:     #ffffff;
+      --muted:    #7a90a8;
+      --border:   rgba(255,255,255,0.07);
+      --radius:   14px;
     }
+
+    html { scroll-behavior: smooth; }
 
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      font-family: 'Space Grotesk', system-ui, sans-serif;
       line-height: 1.7;
-      min-height: 100vh;
+      overflow-x: hidden;
     }
 
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
+    a { color: inherit; text-decoration: none; }
 
-    /* ── NAV ── */
+    /* ─── SUBTLE STATIC GRID BG ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 20% 20%, rgba(0,200,240,0.04) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(0,100,200,0.05) 0%, transparent 50%),
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ─── NAV ─── */
     nav {
-      position: sticky;
-      top: 0;
+      position: fixed;
+      top: 0; left: 0; right: 0;
       z-index: 100;
-      background: rgba(15,17,23,0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      align-items: center;
-      padding: 0 2rem;
-      height: 56px;
+      padding: 0 2.5rem;
+      height: 64px;
+      background: rgba(5,11,21,0.8);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
     }
-    nav .brand { font-weight: 700; font-size: 1rem; letter-spacing: 0.02em; }
-    nav ul { list-style: none; display: flex; gap: 1.5rem; }
-    nav ul a { color: var(--muted); font-size: 0.875rem; transition: color .2s; }
-    nav ul a:hover { color: var(--text); text-decoration: none; }
 
-    /* ── LAYOUT ── */
-    .container { max-width: 900px; margin: 0 auto; padding: 0 1.5rem; }
-
-    /* ── HERO ── */
-    .hero {
-      padding: 5rem 0 4rem;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 2.5rem;
+    .nav-brand {
+      display: flex;
       align-items: center;
+      gap: 0.6rem;
     }
-    .hero-text h1 {
-      font-size: clamp(2rem, 5vw, 3rem);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      line-height: 1.1;
-      background: linear-gradient(135deg, #e2e8f0 30%, var(--accent2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 0.5rem;
+    .nav-avatar {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--cyan), #0070f3);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 0.85rem; color: #fff;
+      border: 1.5px solid var(--cyan-border);
+      flex-shrink: 0;
     }
-    .hero-text .subtitle {
-      font-size: 1.05rem;
-      color: var(--accent);
+    .nav-name {
       font-weight: 600;
-      margin-bottom: 1rem;
+      font-size: 0.9rem;
+      color: var(--text);
     }
-    .hero-text .bio {
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      list-style: none;
+    }
+    .nav-links a {
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      font-size: 0.875rem;
       color: var(--muted);
-      font-size: 0.975rem;
-      max-width: 540px;
-      margin-bottom: 1.5rem;
+      font-weight: 500;
+      transition: color .2s, background .2s;
     }
-    .hero-links { display: flex; gap: 0.75rem; flex-wrap: wrap; }
-    .btn {
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text);
+      background: rgba(255,255,255,0.07);
+    }
+    .nav-links a.active {
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .nav-cv {
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
-      padding: 0.5rem 1.1rem;
-      border-radius: 8px;
+      padding: 0.45rem 1.1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.18);
       font-size: 0.85rem;
       font-weight: 600;
-      transition: all .2s;
-      border: 1px solid transparent;
+      color: var(--text);
+      transition: border-color .2s, background .2s;
     }
-    .btn-primary {
-      background: var(--accent);
-      color: #fff;
-    }
-    .btn-primary:hover { background: #5a7df5; text-decoration: none; }
-    .btn-outline {
-      border-color: var(--border);
-      color: var(--muted);
-      background: var(--surface);
-    }
-    .btn-outline:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+    .nav-cv:hover { border-color: var(--cyan); background: var(--cyan-dim); }
 
-    .hero-avatar img {
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid var(--border);
-    }
-    .hero-avatar .avatar-placeholder {
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
       display: flex;
-      align-items: center;
+      flex-direction: column;
       justify-content: center;
-      font-size: 3rem;
-      font-weight: 700;
-      color: #fff;
-      border: 3px solid var(--border);
+      padding: 6rem 2.5rem 4rem;
+      max-width: 1100px;
+      margin: 0 auto;
     }
 
-    /* ── META CHIPS ── */
-    .meta-chips {
-      display: flex;
-      gap: 0.6rem;
-      flex-wrap: wrap;
-      margin-bottom: 1.25rem;
-    }
-    .chip {
+    .hero-location {
       display: inline-flex;
       align-items: center;
-      gap: 0.35rem;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      padding: 0.25rem 0.75rem;
-      font-size: 0.8rem;
+      gap: 0.4rem;
+      font-size: 0.82rem;
       color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+    .hero-location svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(3.5rem, 10vw, 8rem);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: #fff;
+      margin-bottom: 1rem;
     }
 
-    /* ── SECTION ── */
-    section { padding: 3.5rem 0; border-top: 1px solid var(--border); }
-    .section-label {
+    .hero-role {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.25rem, 3vw, 2rem);
+      font-weight: 700;
+      color: var(--cyan);
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-bio {
+      max-width: 520px;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.75;
+      margin-bottom: 2rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+
+    .btn-cyan {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1.6rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--cyan), #0090d4);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: opacity .2s, transform .15s;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-cyan:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: var(--text);
+      font-weight: 600;
+      font-size: 0.9rem;
+      background: transparent;
+      transition: border-color .2s, background .2s;
+      cursor: pointer;
+    }
+    .btn-ghost:hover { border-color: var(--cyan); background: var(--cyan-dim); }
+
+    .hero-social {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+    .hero-social a {
+      color: var(--muted);
+      transition: color .2s;
+    }
+    .hero-social a:hover { color: var(--cyan); }
+    .hero-social svg { width: 22px; height: 22px; }
+
+    /* ─── SCROLL HINT ─── */
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--muted);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+    .scroll-mouse {
+      width: 22px; height: 34px;
+      border: 2px solid rgba(255,255,255,0.2);
+      border-radius: 999px;
+      display: flex;
+      justify-content: center;
+      padding-top: 6px;
+    }
+    .scroll-dot {
+      width: 4px; height: 7px;
+      background: var(--cyan);
+      border-radius: 999px;
+    }
+
+    /* ─── SECTION WRAPPER ─── */
+    .section {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 2.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-eyebrow {
       font-size: 0.75rem;
       font-weight: 700;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 0.5rem;
+      color: var(--cyan);
+      margin-bottom: 0.6rem;
     }
     .section-title {
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: 1.75rem;
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 2.5rem;
     }
 
-    /* ── RESEARCH INTERESTS ── */
+    /* ─── RESEARCH STATEMENT ─── */
+    .statement-grid {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 3rem;
+      align-items: start;
+    }
+    .statement-text p {
+      color: var(--muted);
+      font-size: 0.975rem;
+      line-height: 1.9;
+      margin-bottom: 1.1rem;
+    }
+    .statement-text p:last-child { margin-bottom: 0; }
+    .statement-text strong { color: var(--text); }
+
+    .statement-aside { display: flex; flex-direction: column; gap: 1rem; }
+
+    .aside-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+    }
+    .aside-box h4 {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--cyan);
+      margin-bottom: 0.75rem;
+    }
+    .aside-box ul { list-style: none; }
+    .aside-box li {
+      font-size: 0.875rem;
+      color: var(--muted);
+      padding: 0.2rem 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+    .aside-box li::before { content: '›'; color: var(--cyan); font-weight: 700; flex-shrink: 0; }
+
+    .stat-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+    .stat-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem;
+      text-align: center;
+    }
+    .stat-card .val {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--cyan);
+      display: block;
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+    .stat-card .lbl { font-size: 0.72rem; color: var(--muted); line-height: 1.3; }
+    .placeholder-val {
+      font-size: 0.7rem !important;
+      color: rgba(0,200,240,0.6) !important;
+      font-style: italic;
+    }
+
+    .insight-box {
+      background: var(--surface);
+      border-left: 3px solid var(--cyan);
+      border-radius: 0 10px 10px 0;
+      padding: 1rem 1.25rem;
+      margin: 1.25rem 0;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    .insight-box strong { color: var(--text); }
+
+    /* ─── INTERESTS GRID ─── */
     .interests-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 1rem;
     }
     .interest-card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 1.25rem 1.5rem;
-      transition: border-color .2s;
+      padding: 1.5rem;
+      transition: border-color .2s, background .2s;
     }
-    .interest-card:hover { border-color: var(--accent); }
-    .interest-card .icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
-    .interest-card h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.35rem; }
-    .interest-card p { font-size: 0.85rem; color: var(--muted); }
+    .interest-card:hover {
+      border-color: var(--cyan-border);
+      background: var(--surface2);
+    }
+    .interest-card .icon {
+      font-size: 1.6rem;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+    .interest-card h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .interest-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
 
-    /* ── PROJECTS ── */
+    /* ─── PROJECTS ─── */
     .projects-list { display: flex; flex-direction: column; gap: 1.25rem; }
     .project-card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 1.5rem;
+      padding: 2rem;
       transition: border-color .2s;
     }
-    .project-card:hover { border-color: var(--accent); }
-    .project-header {
+    .project-card:hover { border-color: var(--cyan-border); }
+
+    .project-top {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
       gap: 1rem;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
     }
-    .project-header h3 { font-size: 1rem; font-weight: 700; }
+    .project-top h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 800;
+    }
     .project-badge {
       font-size: 0.72rem;
-      font-weight: 600;
-      background: var(--tag-bg);
-      color: var(--tag-text);
+      font-weight: 700;
+      background: var(--cyan-dim);
+      color: var(--cyan);
+      border: 1px solid var(--cyan-border);
       border-radius: 999px;
-      padding: 0.2rem 0.65rem;
+      padding: 0.2rem 0.75rem;
       white-space: nowrap;
+      flex-shrink: 0;
     }
-    .project-desc { font-size: 0.9rem; color: var(--muted); margin-bottom: 1rem; }
-    .project-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .project-sub {
+      font-size: 0.82rem;
+      color: var(--cyan);
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+    .project-desc {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 1.25rem;
+    }
+    .project-findings {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+    .finding-pill {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.75rem;
+      text-align: center;
+    }
+    .finding-pill .fval {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--cyan);
+      display: block;
+    }
+    .finding-pill .flbl { font-size: 0.72rem; color: var(--muted); }
+    .tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
     .tag {
       font-size: 0.78rem;
-      background: var(--tag-bg);
-      color: var(--tag-text);
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      color: var(--muted);
       border-radius: 6px;
-      padding: 0.2rem 0.6rem;
+      padding: 0.2rem 0.65rem;
     }
 
-    /* ── SKILLS ── */
+    /* ─── SKILLS ─── */
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
       gap: 1rem;
     }
     .skill-group {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 1.1rem 1.25rem;
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s;
     }
+    .skill-group:hover { border-color: var(--cyan-border); }
     .skill-group h3 {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--accent2);
-      margin-bottom: 0.65rem;
+      letter-spacing: 0.1em;
+      color: var(--cyan);
+      margin-bottom: 0.85rem;
     }
     .skill-group ul { list-style: none; }
     .skill-group li {
-      font-size: 0.85rem;
-      color: var(--muted);
-      padding: 0.15rem 0;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-    .skill-group li::before { content: '›'; color: var(--accent); font-weight: 700; }
-
-    /* ── EXPERIENCE ── */
-    .timeline { display: flex; flex-direction: column; gap: 0; }
-    .timeline-item {
-      display: grid;
-      grid-template-columns: 120px 1fr;
-      gap: 1.5rem;
-      position: relative;
-    }
-    .timeline-item + .timeline-item { margin-top: 2rem; }
-    .timeline-date {
-      font-size: 0.8rem;
-      color: var(--muted);
-      padding-top: 0.2rem;
-      text-align: right;
-    }
-    .timeline-content {}
-    .timeline-content h3 { font-size: 0.975rem; font-weight: 700; margin-bottom: 0.1rem; }
-    .timeline-content .org { font-size: 0.85rem; color: var(--accent); margin-bottom: 0.6rem; }
-    .timeline-content ul { list-style: none; }
-    .timeline-content li {
       font-size: 0.875rem;
       color: var(--muted);
       padding: 0.2rem 0;
       display: flex;
+      align-items: center;
       gap: 0.5rem;
     }
-    .timeline-content li::before { content: '—'; color: var(--border); flex-shrink: 0; }
+    .skill-group li::before {
+      content: '';
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--cyan);
+      flex-shrink: 0;
+      opacity: 0.6;
+    }
 
-    /* ── EDUCATION ── */
-    .edu-cards { display: flex; flex-direction: column; gap: 1rem; }
+    /* ─── EXPERIENCE ─── */
+    .exp-list { display: flex; flex-direction: column; gap: 0; }
+    .exp-item {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 2rem;
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .exp-item:last-child { border-bottom: none; }
+    .exp-date { font-size: 0.8rem; color: var(--muted); padding-top: 0.15rem; }
+    .exp-role {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 800;
+      margin-bottom: 0.15rem;
+    }
+    .exp-org { font-size: 0.875rem; color: var(--cyan); font-weight: 600; margin-bottom: 0.75rem; }
+    .exp-bullets { list-style: none; }
+    .exp-bullets li {
+      font-size: 0.875rem;
+      color: var(--muted);
+      padding: 0.22rem 0;
+      display: flex;
+      gap: 0.6rem;
+      align-items: flex-start;
+    }
+    .exp-bullets li::before {
+      content: '·';
+      color: var(--cyan);
+      flex-shrink: 0;
+      opacity: 0.5;
+    }
+
+    /* ─── EDUCATION ─── */
+    .edu-list { display: flex; flex-direction: column; gap: 1rem; }
     .edu-card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 1.25rem 1.5rem;
+      padding: 1.5rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      gap: 1rem;
+      gap: 1.5rem;
+      transition: border-color .2s;
     }
-    .edu-card h3 { font-size: 0.975rem; font-weight: 700; margin-bottom: 0.25rem; }
-    .edu-card .inst { font-size: 0.875rem; color: var(--accent); margin-bottom: 0.35rem; }
-    .edu-card .courses { font-size: 0.82rem; color: var(--muted); }
-    .edu-year { font-size: 0.8rem; color: var(--muted); white-space: nowrap; }
-    .gpa-badge {
+    .edu-card:hover { border-color: var(--cyan-border); }
+    .edu-degree {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 800;
+      margin-bottom: 0.2rem;
+    }
+    .edu-inst { font-size: 0.875rem; color: var(--cyan); font-weight: 600; margin-bottom: 0.5rem; }
+    .edu-courses { font-size: 0.82rem; color: var(--muted); max-width: 500px; }
+    .edu-year { font-size: 0.82rem; color: var(--muted); white-space: nowrap; }
+    .gpa-chip {
       display: inline-block;
-      font-size: 0.75rem;
-      background: var(--tag-bg);
-      color: var(--tag-text);
-      border-radius: 6px;
-      padding: 0.15rem 0.5rem;
-      margin-top: 0.3rem;
+      margin-top: 0.5rem;
+      font-size: 0.72rem;
+      background: var(--cyan-dim);
+      color: var(--cyan);
+      border: 1px solid var(--cyan-border);
+      border-radius: 999px;
+      padding: 0.15rem 0.6rem;
     }
 
-    /* ── CONTACT ── */
+    /* ─── CONTACT ─── */
     .contact-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
       gap: 1rem;
     }
-    .contact-item {
+    .contact-card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 1.1rem 1.25rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
+      padding: 1.25rem 1.5rem;
+      transition: border-color .2s, background .2s;
     }
-    .contact-item .label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
-    .contact-item .val { font-size: 0.9rem; font-weight: 600; }
+    .contact-card:hover { border-color: var(--cyan-border); background: var(--surface2); }
+    .contact-card .c-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 0.35rem;
+    }
+    .contact-card .c-val {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .contact-card a.c-val { color: var(--cyan); }
+    .contact-card a.c-val:hover { text-decoration: underline; }
 
-    /* ── FOOTER ── */
+    .contact-cta {
+      margin-top: 2rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* ─── FOOTER ─── */
     footer {
-      padding: 2rem 0;
-      border-top: 1px solid var(--border);
+      position: relative;
+      z-index: 1;
       text-align: center;
+      padding: 2rem;
+      border-top: 1px solid var(--border);
       font-size: 0.8rem;
       color: var(--muted);
     }
+    footer span { color: var(--cyan); }
 
-    @media (max-width: 640px) {
-      .hero { grid-template-columns: 1fr; }
-      .hero-avatar { display: none; }
-      .timeline-item { grid-template-columns: 1fr; gap: 0.25rem; }
-      .timeline-date { text-align: left; }
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      nav { padding: 0 1.25rem; }
+      .nav-links { display: none; }
+      .hero { padding: 6rem 1.25rem 4rem; }
+      .section { padding: 3.5rem 1.25rem; }
+      .statement-grid { grid-template-columns: 1fr; }
+      .exp-item { grid-template-columns: 1fr; gap: 0.25rem; }
       .edu-card { flex-direction: column; }
     }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
+<!-- ─── NAV ─── -->
 <nav>
-  <span class="brand">Zainab Sohail</span>
-  <ul>
-    <li><a href="#interests">Research</a></li>
+  <div class="nav-brand">
+    <div class="nav-avatar">ZS</div>
+    <span class="nav-name">Zainab Sohail</span>
+  </div>
+
+  <ul class="nav-links">
+    <li><a href="#about" class="active">About</a></li>
+    <li><a href="#research">Research</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
+
+  <a href="mailto:zainabsohail09@gmail.com" class="nav-cv">
+    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M8 4v16M16 4v16M4 12h16"/></svg>
+    Contact Me
+  </a>
 </nav>
 
-<div class="container">
+<!-- ─── HERO ─── -->
+<section class="hero" id="about">
+  <div class="hero-location">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+    Erlangen, Germany
+  </div>
 
-  <!-- HERO -->
-  <div class="hero">
-    <div class="hero-text">
-      <h1>Zainab Sohail</h1>
-      <p class="subtitle">MSc Artificial Intelligence · FAU Erlangen-Nürnberg</p>
+  <h1>Zainab<br>Sohail</h1>
+  <p class="hero-role">MSc AI Researcher · Computer Vision</p>
 
-      <div class="meta-chips">
-        <span class="chip">📍 Erlangen, Germany</span>
-        <span class="chip">🎓 Expected 2026</span>
-        <span class="chip">🔬 Thesis Candidate</span>
-        <span class="chip">🏥 4+ yrs Siemens Healthineers</span>
-      </div>
+  <p class="hero-bio">
+    MSc Artificial Intelligence student at FAU Erlangen-Nürnberg investigating foundation model robustness in computer vision. 4+ years industry experience at Siemens Healthineers. Seeking a Master's thesis at the intersection of deep learning, medical imaging, and applied AI.
+  </p>
 
-      <p class="bio">
-        I am an MS AI student specialising in computer vision and deep learning,
-        with hands-on research experience in foundation model robustness and
-        interactive image segmentation. My industry background at Siemens Healthineers
-        grounds my research in real-world, data-driven systems. I am actively seeking
-        a Master's thesis position at the intersection of applied AI, computer vision,
-        and medical or autonomous systems.
+  <div class="hero-actions">
+    <a href="#projects" class="btn-cyan">
+      View Research →
+    </a>
+    <a href="#contact" class="btn-ghost">
+      Get in Touch
+    </a>
+  </div>
+
+  <div class="hero-social">
+    <!-- LinkedIn -->
+    <a href="https://linkedin.com/in/zainab-sohail" target="_blank" title="LinkedIn">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+    </a>
+    <!-- GitHub -->
+    <a href="https://github.com/xo58gole" target="_blank" title="GitHub">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.09.66-.22.66-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 6.8c.85 0 1.71.11 2.51.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.16.58.67.48A10.01 10.01 0 0 0 22 12c0-5.52-4.48-10-10-10z"/></svg>
+    </a>
+    <!-- Email -->
+    <a href="mailto:zainabsohail09@gmail.com" title="Email">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+    </a>
+  </div>
+
+  <div class="scroll-hint">
+    <div class="scroll-mouse"><div class="scroll-dot"></div></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ─── RESEARCH STATEMENT ─── -->
+<section class="section" id="statement">
+  <p class="section-eyebrow">Research Statement</p>
+  <h2 class="section-title">What I Work On &amp; Why</h2>
+
+  <div class="statement-grid">
+    <div class="statement-text">
+      <p>
+        My research centres on <strong>understanding when and why deep learning models fail under real-world conditions</strong>, particularly foundation models deployed on images that diverge from their training distribution. This question matters most in high-stakes domains like medical imaging, where model confidence must be calibrated against routine acquisition variability. Low resolution, motion blur, and sensor noise are not edge cases but structural features of clinical data.
       </p>
 
-      <div class="hero-links">
-        <a class="btn btn-primary" href="mailto:zainabsohail09@gmail.com">✉ Contact Me</a>
-        <a class="btn btn-outline" href="https://linkedin.com/in/zainab-sohail" target="_blank">LinkedIn</a>
-        <a class="btn btn-outline" href="https://github.com/xo58gole" target="_blank">GitHub</a>
+      <div class="insight-box">
+        <strong>Core question I investigate:</strong> Under what conditions does a foundation model's performance degrade non-linearly, and can we predict or recover from those failure points?
+      </div>
+
+      <p>
+        My Master's-level work has attacked this through a <strong>controlled robustness study of SAM on PASCAL VOC</strong>, evaluating segmentation performance across ~2,900 images under two degradation types: low resolution (4x and 5x downsampling) and Gaussian noise (σ=25 and σ=50). A key finding was that low-resolution degradation is significantly more detrimental than noise. At 5x downsampling, SAM loses boundary signal entirely and cannot produce coherent masks, while at σ=50 noise, preprocessing with BM3D largely restores performance. Prompt strategy also matters: a bounding box with corner points consistently outperforms single center-point clicking on degraded images.
+      </p>
+
+      <p>
+        In parallel, I reproduced the <strong>SAM-REF interactive segmentation pipeline</strong> end-to-end: dataset indexing, embedding caching, experiment logging, and benchmark evaluation (NoC@90, NoC@95) across GrabCut, Berkeley, DAVIS, and SBD. Training used a 500-image COCO subset on an NVIDIA GTX 1080 Ti. Reproduction work sharpens the instinct for what implementation choices actually drive results versus what papers claim drives them.
+      </p>
+
+      <p>
+        <strong>For my thesis</strong>, I want to take this line of investigation further: how can segmentation models be made more robust under real-world degradation, and how should they communicate uncertainty when their inputs fall outside the training distribution? These questions are especially pressing in medical imaging, where acquisition noise, low resolution, and image artifacts are structural features of clinical data, not exceptional cases. My four years at Siemens Healthineers have shown me the gap between a model that works in a notebook and one that is trustworthy in a clinical workflow. I want my thesis to sit closer to the latter.
+      </p>
+    </div>
+
+    <div class="statement-aside">
+      <div class="aside-box">
+        <h4>SAM Robustness Study</h4>
+        <div class="stat-row">
+          <div class="stat-card">
+            <span class="val">~2,900</span>
+            <span class="lbl">Images evaluated (PASCAL VOC)</span>
+          </div>
+          <div class="stat-card">
+            <span class="val">4× / 5×</span>
+            <span class="lbl">Low-res downsampling levels</span>
+          </div>
+          <div class="stat-card">
+            <span class="val">σ 25/50</span>
+            <span class="lbl">Gaussian noise levels tested</span>
+          </div>
+          <div class="stat-card">
+            <span class="val">BM3D</span>
+            <span class="lbl">Best noise recovery method</span>
+          </div>
+        </div>
+        <p style="font-size:0.72rem;color:var(--muted);margin-top:0.75rem;">Key finding: low-resolution is more detrimental than noise. Box + corners prompting most robust on degraded inputs.</p>
+      </div>
+
+      <div class="aside-box">
+        <h4>Thesis Interests</h4>
+        <ul>
+          <li>Robust segmentation for medical imaging</li>
+          <li>Uncertainty quantification in CV models</li>
+          <li>Degradation-aware training / fine-tuning</li>
+          <li>Foundation model evaluation under domain shift</li>
+          <li>AI reliability in clinical settings</li>
+        </ul>
+      </div>
+
+      <div class="aside-box">
+        <h4>Currently Open To</h4>
+        <ul>
+          <li>Master's thesis at FAU research groups</li>
+          <li>Industry thesis with research component</li>
+          <li>Start: <strong style="color:var(--text)">Flexible from 2025/2026</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── RESEARCH INTERESTS ─── -->
+<section class="section" id="research">
+  <p class="section-eyebrow">Focus Areas</p>
+  <h2 class="section-title">Research Interests</h2>
+  <div class="interests-grid">
+    <div class="interest-card">
+      <span class="icon">🔬</span>
+      <h3>Computer Vision & Segmentation</h3>
+      <p>Foundation model robustness; interactive and semantic segmentation; performance under real-world image degradation.</p>
+    </div>
+    <div class="interest-card">
+      <span class="icon">🏥</span>
+      <h3>Medical Imaging AI</h3>
+      <p>Applying deep learning to clinical image analysis; model reliability and uncertainty in diagnostic settings.</p>
+    </div>
+    <div class="interest-card">
+      <span class="icon">🧠</span>
+      <h3>Deep Learning</h3>
+      <p>Neural network evaluation, anomaly detection, classification, and generalisation across distribution shifts.</p>
+    </div>
+    <div class="interest-card">
+      <span class="icon">📐</span>
+      <h3>Reproducible ML Research</h3>
+      <p>Rigorous experimental design, controlled benchmarking, and transparent documentation of ML results.</p>
+    </div>
+    <div class="interest-card">
+      <span class="icon">🚗</span>
+      <h3>Autonomous & Connected Systems</h3>
+      <p>Data-driven perception for autonomous driving and mobility, including time-series and sensor analysis.</p>
+    </div>
+    <div class="interest-card">
+      <span class="icon">⚠️</span>
+      <h3>Uncertainty & Robustness</h3>
+      <p>Quantifying and communicating model uncertainty; calibration under domain shift and degraded inputs.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROJECTS ─── -->
+<section class="section" id="projects">
+  <p class="section-eyebrow">Research</p>
+  <h2 class="section-title">Projects</h2>
+  <div class="projects-list">
+
+    <div class="project-card">
+      <div class="project-top">
+        <h3>SAM Robustness Study</h3>
+        <span class="project-badge">Master's Research</span>
+      </div>
+      <p class="project-sub">Controlled Experiment Design · FAU Erlangen-Nürnberg · Visual Computing Lab</p>
+      <p class="project-desc">
+        Designed and executed a controlled robustness study evaluating SAM on PASCAL VOC across ~2,900 images under two degradation types: low resolution (4x and 5x downsampling) and Gaussian noise (σ=25, σ=50). Built the full analysis pipeline in Python covering data preparation, degradation application, metric evaluation (IoU), and comparative reporting. All variables except image quality were held constant to enable clean causal attribution. Additionally tested six preprocessing methods for noise recovery and six prompt strategies, finding that BM3D denoising and box+corners prompting yield the best degraded-image performance.
+      </p>
+      <div class="project-findings">
+        <div class="finding-pill">
+          <span class="fval">~2,900</span>
+          <span class="flbl">Images evaluated</span>
+        </div>
+        <div class="finding-pill">
+          <span class="fval">4× / 5×</span>
+          <span class="flbl">Low-res levels tested</span>
+        </div>
+        <div class="finding-pill">
+          <span class="fval">BM3D</span>
+          <span class="flbl">Best noise preprocessor</span>
+        </div>
+        <div class="finding-pill">
+          <span class="fval">Box+pts</span>
+          <span class="flbl">Most robust prompt type</span>
+        </div>
+      </div>
+      <div class="tags">
+        <span class="tag">SAM</span>
+        <span class="tag">PASCAL VOC</span>
+        <span class="tag">Image Segmentation</span>
+        <span class="tag">IoU</span>
+        <span class="tag">Robustness Evaluation</span>
+        <span class="tag">Python</span>
+        <span class="tag">Prompt Engineering</span>
       </div>
     </div>
 
-    <div class="hero-avatar">
-      <div class="avatar-placeholder">ZS</div>
+    <div class="project-card">
+      <div class="project-top">
+        <h3>SAM-REF Reproduction</h3>
+        <span class="project-badge">Master's Research</span>
+      </div>
+      <p class="project-sub">End-to-End ML Pipeline · FAU Erlangen-Nürnberg · Cognitive Computer Vision Lab</p>
+      <p class="project-desc">
+        Reproduced the SAM-REF interactive segmentation pipeline (CVPR 2025) end-to-end in PyTorch under reduced data and compute constraints. Trained on a 500-image COCO subset (2,849 instances) and evaluated across four benchmarks: GrabCut, Berkeley, DAVIS, and SBD. Implemented dataset indexing, SAM embedding caching, two-stage training (StageA fine-tunes the decoder; StageB trains the GFR/LFR refiner), click simulation, and full NoC@90/NoC@95 evaluation. Key finding: StageA with ViT-H improved GrabCut NoC@90 from 4.46 to 4.22. Qualitatively, SAM's IoU collapsed to 34% at click 5 after a strong negative click, while the fine-tuned decoder held at 95.4%, demonstrating more stable click-by-click behavior even where aggregate NoC does not improve.
+      </p>
+      <div class="project-findings">
+        <div class="finding-pill">
+          <span class="fval">500</span>
+          <span class="flbl">COCO training images</span>
+        </div>
+        <div class="finding-pill">
+          <span class="fval">4</span>
+          <span class="flbl">Benchmarks evaluated</span>
+        </div>
+        <div class="finding-pill">
+          <span class="fval">4.46 → 4.22</span>
+          <span class="flbl">GrabCut NoC@90 (ViT-H)</span>
+        </div>
+        <div class="finding-pill">
+          <span class="fval">34% vs 95.4%</span>
+          <span class="flbl">SAM vs StageA IoU at click 5</span>
+        </div>
+      </div>
+      <div class="tags">
+        <span class="tag">SAM-REF</span>
+        <span class="tag">PyTorch</span>
+        <span class="tag">Interactive Segmentation</span>
+        <span class="tag">NoC@90 / NoC@95</span>
+        <span class="tag">Reproducibility</span>
+        <span class="tag">COCO</span>
+        <span class="tag">Embedding Caching</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-top">
+        <h3>AI-Driven Innovation Analytics</h3>
+        <span class="project-badge">Industry · Siemens Healthineers</span>
+      </div>
+      <p class="project-sub">CS Innovation & Data Science · Oct 2025 – Present</p>
+      <p class="project-desc">
+        Applied descriptive analytics, segmentation analysis, and trend modelling on innovation datasets to support AI-driven research prioritisation at Siemens Healthineers. Validated and prototyped digital service concepts with a focus on AI, ML, and GenAI in a healthcare context. Produced data analysis and visualisation outputs for senior stakeholders across innovation and sustainability workstreams.
+      </p>
+      <div class="tags">
+        <span class="tag">Healthcare AI</span>
+        <span class="tag">GenAI</span>
+        <span class="tag">Segmentation Analysis</span>
+        <span class="tag">Trend Modelling</span>
+        <span class="tag">Data Visualisation</span>
+        <span class="tag">Python</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── SKILLS ─── -->
+<section class="section" id="skills">
+  <p class="section-eyebrow">Toolkit</p>
+  <h2 class="section-title">Technical Skills</h2>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <h3>ML & Deep Learning</h3>
+      <ul>
+        <li>PyTorch</li>
+        <li>scikit-learn</li>
+        <li>Deep Neural Networks</li>
+        <li>Anomaly Detection</li>
+        <li>Classification & Clustering</li>
+        <li>Time Series Analysis</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <h3>Computer Vision</h3>
+      <ul>
+        <li>Segment Anything Model (SAM)</li>
+        <li>Image Segmentation</li>
+        <li>Robustness Evaluation</li>
+        <li>OpenCV</li>
+        <li>Degraded Image Analysis</li>
+        <li>IoU, Dice, mIoU, NoC</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <h3>Programming & Data</h3>
+      <ul>
+        <li>Python (Pandas, NumPy)</li>
+        <li>SQL</li>
+        <li>Data Pipelines / ETL</li>
+        <li>Exploratory Data Analysis</li>
+        <li>Reproducible Experiment Design</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <h3>Tools & Infrastructure</h3>
+      <ul>
+        <li>Git / GitLab CI/CD</li>
+        <li>Azure</li>
+        <li>Snowflake</li>
+        <li>Jupyter</li>
+        <li>Power BI</li>
+        <li>Power Automate</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ─── EXPERIENCE ─── -->
+<section class="section" id="experience">
+  <p class="section-eyebrow">Background</p>
+  <h2 class="section-title">Industry Experience</h2>
+  <div class="exp-list">
+
+    <div class="exp-item">
+      <div class="exp-date">Oct 2025 – Present</div>
+      <div>
+        <p class="exp-role">Working Student: CS Innovation &amp; Data Science</p>
+        <p class="exp-org">Siemens Healthineers</p>
+        <ul class="exp-bullets">
+          <li>Applied descriptive analytics and segmentation on innovation datasets for AI-driven research prioritisation</li>
+          <li>Validated and prototyped digital service concepts focused on AI, ML, and GenAI in healthcare</li>
+          <li>Produced visualisation outputs for senior stakeholders across innovation and sustainability workstreams</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">Jan 2023 – Sept 2025</div>
+      <div>
+        <p class="exp-role">Working Student: Digital Automation &amp; Data Governance</p>
+        <p class="exp-org">Siemens Healthineers</p>
+        <ul class="exp-bullets">
+          <li>Built Power BI dashboards (DAX, Power Query) and automated reporting workflows with Power Automate</li>
+          <li>Developed a Power Apps platform reducing manual processing effort by ~40%</li>
+          <li>Trained 50+ users; authored adoption documentation for sustained platform use</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">Feb 2022 – Dec 2022</div>
+      <div>
+        <p class="exp-role">Working Student: IT Collaboration &amp; Digital Workplace</p>
+        <p class="exp-org">Siemens Healthineers</p>
+        <ul class="exp-bullets">
+          <li>Supported SharePoint modernisation and MS365 communication initiatives</li>
+          <li>Contributed to early automation work using Power Automate</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">Sept 2020 – Oct 2021</div>
+      <div>
+        <p class="exp-role">Junior Software QA Engineer</p>
+        <p class="exp-org">Auriga Solutions</p>
+        <ul class="exp-bullets">
+          <li>Translated technical specifications into structured test cases in agile squads</li>
+          <li>Verified frontend and backend features; systematically tracked defects</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── EDUCATION ─── -->
+<section class="section" id="education">
+  <p class="section-eyebrow">Academic Background</p>
+  <h2 class="section-title">Education</h2>
+  <div class="edu-list">
+
+    <div class="edu-card">
+      <div>
+        <p class="edu-degree">Master of Science in Artificial Intelligence</p>
+        <p class="edu-inst">Friedrich-Alexander-Universität Erlangen-Nürnberg (FAU)</p>
+        <p class="edu-courses">Deep Learning · ML for Time Series · Pattern Recognition · Business Intelligence · Connected Mobility &amp; Autonomous Driving</p>
+        <span class="gpa-chip">GPA 2.7 (German scale)</span>
+      </div>
+      <div class="edu-year">2022 – 2026</div>
+    </div>
+
+    <div class="edu-card">
+      <div>
+        <p class="edu-degree">Bachelor of Science in Software Engineering</p>
+        <p class="edu-inst">University of Karachi</p>
+      </div>
+      <div class="edu-year">2016 – 2020</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── CONTACT ─── -->
+<section class="section" id="contact">
+  <p class="section-eyebrow">Get in Touch</p>
+  <h2 class="section-title">Contact</h2>
+
+  <div class="contact-grid">
+    <div class="contact-card">
+      <p class="c-label">Email</p>
+      <a href="mailto:zainabsohail09@gmail.com" class="c-val">zainabsohail09@gmail.com</a>
+    </div>
+    <div class="contact-card">
+      <p class="c-label">Location</p>
+      <p class="c-val">Erlangen, Germany</p>
+    </div>
+    <div class="contact-card">
+      <p class="c-label">LinkedIn</p>
+      <a href="https://linkedin.com/in/zainab-sohail" target="_blank" class="c-val">zainab-sohail</a>
+    </div>
+    <div class="contact-card">
+      <p class="c-label">GitHub</p>
+      <a href="https://github.com/xo58gole" target="_blank" class="c-val">xo58gole</a>
+    </div>
+    <div class="contact-card">
+      <p class="c-label">Phone</p>
+      <p class="c-val">+49 157 5827 1626</p>
+    </div>
+    <div class="contact-card">
+      <p class="c-label">Status</p>
+      <p class="c-val" style="color:var(--cyan)">Open to Thesis Positions</p>
     </div>
   </div>
 
-  <!-- RESEARCH INTERESTS -->
-  <section id="interests">
-    <p class="section-label">Focus Areas</p>
-    <h2 class="section-title">Research Interests</h2>
-    <div class="interests-grid">
-      <div class="interest-card">
-        <div class="icon">🔍</div>
-        <h3>Computer Vision & Image Segmentation</h3>
-        <p>Foundation model robustness under real-world degradation; interactive and semantic segmentation pipelines.</p>
-      </div>
-      <div class="interest-card">
-        <div class="icon">🧠</div>
-        <h3>Deep Learning</h3>
-        <p>Neural network design, model evaluation, anomaly detection, and generalisation across domains.</p>
-      </div>
-      <div class="interest-card">
-        <div class="icon">🏥</div>
-        <h3>AI in Healthcare & Industry</h3>
-        <p>Applying ML to medical imaging and industrial data; bridging research prototypes with production workflows.</p>
-      </div>
-      <div class="interest-card">
-        <div class="icon">🚗</div>
-        <h3>Autonomous & Connected Systems</h3>
-        <p>Data-driven perception systems for autonomous driving and mobility, including time-series sensor analysis.</p>
-      </div>
-      <div class="interest-card">
-        <div class="icon">📊</div>
-        <h3>Reproducible ML Research</h3>
-        <p>Rigorous experimental design, controlled benchmarking, and systematic performance analysis.</p>
-      </div>
-      <div class="interest-card">
-        <div class="icon">⏱</div>
-        <h3>Time Series & Anomaly Detection</h3>
-        <p>ML approaches for temporal data analysis, pattern recognition, and unsupervised anomaly detection.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROJECTS -->
-  <section id="projects">
-    <p class="section-label">Research</p>
-    <h2 class="section-title">Projects</h2>
-    <div class="projects-list">
-
-      <div class="project-card">
-        <div class="project-header">
-          <h3>SAM Robustness Study — Controlled Experiment Design</h3>
-          <span class="project-badge">Master's Research</span>
-        </div>
-        <p class="project-desc">
-          Designed and executed a structured experiment evaluating the Segment Anything Model (SAM)
-          under degraded image conditions — low resolution, Gaussian noise, and blur — across ~2,900 images.
-          Built the full analysis pipeline in Python covering data preparation, controlled degradation,
-          and metric evaluation (IoU, Dice) with comparative reporting. The study emphasises rigorous
-          scientific methodology and reproducible results under real-world degradation scenarios.
-        </p>
-        <div class="project-tags">
-          <span class="tag">SAM</span>
-          <span class="tag">PyTorch</span>
-          <span class="tag">Image Segmentation</span>
-          <span class="tag">IoU / Dice</span>
-          <span class="tag">Robustness Evaluation</span>
-          <span class="tag">Python</span>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-header">
-          <h3>SAM-REF Reproduction — End-to-End ML Pipeline</h3>
-          <span class="project-badge">Master's Research</span>
-        </div>
-        <p class="project-desc">
-          Reproduced an interactive segmentation pipeline from the SAM-REF paper end-to-end in PyTorch,
-          implementing dataset indexing, embedding caching, automated experiment logging, and benchmark
-          evaluation (mIoU, NoC). All protocols, hyperparameters, and results were fully documented
-          for auditability, demonstrating a strong commitment to reproducible research.
-        </p>
-        <div class="project-tags">
-          <span class="tag">SAM-REF</span>
-          <span class="tag">PyTorch</span>
-          <span class="tag">Interactive Segmentation</span>
-          <span class="tag">mIoU / NoC</span>
-          <span class="tag">Reproducibility</span>
-          <span class="tag">Benchmark Evaluation</span>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-header">
-          <h3>AI-Driven Innovation Analytics — Siemens Healthineers</h3>
-          <span class="project-badge">Industry · Present</span>
-        </div>
-        <p class="project-desc">
-          Applied descriptive analytics, segmentation, and trend analysis on innovation datasets to
-          support AI-driven research prioritisation at Siemens Healthineers. Validated and prototyped
-          digital service concepts with a focus on AI, ML, and GenAI in a healthcare context, producing
-          outputs for senior stakeholders across innovation and sustainability workstreams.
-        </p>
-        <div class="project-tags">
-          <span class="tag">Healthcare AI</span>
-          <span class="tag">GenAI</span>
-          <span class="tag">Data Analysis</span>
-          <span class="tag">Segmentation</span>
-          <span class="tag">Trend Analysis</span>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- SKILLS -->
-  <section id="skills">
-    <p class="section-label">Toolkit</p>
-    <h2 class="section-title">Technical Skills</h2>
-    <div class="skills-grid">
-
-      <div class="skill-group">
-        <h3>ML &amp; Deep Learning</h3>
-        <ul>
-          <li>PyTorch</li>
-          <li>scikit-learn</li>
-          <li>Deep Neural Networks</li>
-          <li>Anomaly Detection</li>
-          <li>Classification &amp; Clustering</li>
-          <li>Time Series Analysis</li>
-        </ul>
-      </div>
-
-      <div class="skill-group">
-        <h3>Computer Vision</h3>
-        <ul>
-          <li>Segment Anything Model (SAM)</li>
-          <li>Image Segmentation</li>
-          <li>Robustness Evaluation</li>
-          <li>OpenCV</li>
-          <li>Degraded Image Analysis</li>
-          <li>IoU, Dice, mIoU, NoC</li>
-        </ul>
-      </div>
-
-      <div class="skill-group">
-        <h3>Programming</h3>
-        <ul>
-          <li>Python (Pandas, NumPy)</li>
-          <li>SQL</li>
-          <li>Data Pipelines / ETL</li>
-          <li>Exploratory Data Analysis</li>
-          <li>Reproducible Experiment Design</li>
-        </ul>
-      </div>
-
-      <div class="skill-group">
-        <h3>Tools &amp; Infrastructure</h3>
-        <ul>
-          <li>Git / GitLab CI/CD</li>
-          <li>Azure</li>
-          <li>Snowflake</li>
-          <li>Jupyter</li>
-          <li>Power BI</li>
-          <li>Power Automate</li>
-        </ul>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- EXPERIENCE -->
-  <section id="experience">
-    <p class="section-label">Background</p>
-    <h2 class="section-title">Industry Experience</h2>
-    <div class="timeline">
-
-      <div class="timeline-item">
-        <div class="timeline-date">Oct 2025 – Present</div>
-        <div class="timeline-content">
-          <h3>Working Student — CS Innovation &amp; Data Science</h3>
-          <p class="org">Siemens Healthineers</p>
-          <ul>
-            <li>Analytics and segmentation on innovation datasets to support AI-driven research prioritisation</li>
-            <li>Validated and prototyped digital service concepts focused on AI, ML, and GenAI in healthcare</li>
-            <li>Produced data visualisation outputs for senior stakeholders across innovation workstreams</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-date">Jan 2023 – Sept 2025</div>
-        <div class="timeline-content">
-          <h3>Working Student — Digital Automation &amp; Data Governance</h3>
-          <p class="org">Siemens Healthineers</p>
-          <ul>
-            <li>Built Power BI dashboards (DAX, Power Query) and automated reporting with Power Automate</li>
-            <li>Developed a Power Apps platform reducing manual processing effort by ~40%</li>
-            <li>Trained 50+ users and authored adoption documentation for the platform</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-date">Feb 2022 – Dec 2022</div>
-        <div class="timeline-content">
-          <h3>Working Student — IT Collaboration &amp; Digital Workplace</h3>
-          <p class="org">Siemens Healthineers</p>
-          <ul>
-            <li>Supported SharePoint modernisation and internal MS365 communication initiatives</li>
-            <li>Contributed to early automation work using Power Automate</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-date">Sept 2020 – Oct 2021</div>
-        <div class="timeline-content">
-          <h3>Junior Software QA Engineer</h3>
-          <p class="org">Auriga Solutions</p>
-          <ul>
-            <li>Translated technical specifications into structured test cases in agile squads</li>
-            <li>Verified frontend and backend features; systematically logged and tracked defects</li>
-          </ul>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- EDUCATION -->
-  <section id="education">
-    <p class="section-label">Academic Background</p>
-    <h2 class="section-title">Education</h2>
-    <div class="edu-cards">
-
-      <div class="edu-card">
-        <div>
-          <h3>Master of Science — Artificial Intelligence</h3>
-          <p class="inst">Friedrich-Alexander-Universität Erlangen-Nürnberg (FAU)</p>
-          <p class="courses">Deep Learning · ML for Time Series · Pattern Recognition · Business Intelligence · Connected Mobility &amp; Autonomous Driving</p>
-          <span class="gpa-badge">GPA 2.7 (German scale)</span>
-        </div>
-        <div class="edu-year">2022 – 2026</div>
-      </div>
-
-      <div class="edu-card">
-        <div>
-          <h3>Bachelor of Science — Software Engineering</h3>
-          <p class="inst">University of Karachi</p>
-        </div>
-        <div class="edu-year">2016 – 2020</div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact">
-    <p class="section-label">Get in Touch</p>
-    <h2 class="section-title">Contact</h2>
-    <div class="contact-grid">
-      <div class="contact-item">
-        <span class="label">Email</span>
-        <a class="val" href="mailto:zainabsohail09@gmail.com">zainabsohail09@gmail.com</a>
-      </div>
-      <div class="contact-item">
-        <span class="label">Location</span>
-        <span class="val">Erlangen, Germany</span>
-      </div>
-      <div class="contact-item">
-        <span class="label">LinkedIn</span>
-        <a class="val" href="https://linkedin.com/in/zainab-sohail" target="_blank">zainab-sohail</a>
-      </div>
-      <div class="contact-item">
-        <span class="label">GitHub</span>
-        <a class="val" href="https://github.com/xo58gole" target="_blank">xo58gole</a>
-      </div>
-      <div class="contact-item">
-        <span class="label">Phone</span>
-        <span class="val">+49 157 5827 1626</span>
-      </div>
-      <div class="contact-item">
-        <span class="label">Status</span>
-        <span class="val">Open to Thesis Positions</span>
-      </div>
-    </div>
-  </section>
-
-</div>
+  <div class="contact-cta">
+    <a href="mailto:zainabsohail09@gmail.com" class="btn-cyan">Send an Email →</a>
+    <a href="https://linkedin.com/in/zainab-sohail" target="_blank" class="btn-ghost">Connect on LinkedIn</a>
+  </div>
+</section>
 
 <footer>
-  <div class="container">
-    Zainab Sohail · MSc AI, FAU Erlangen-Nürnberg · <a href="mailto:zainabsohail09@gmail.com">zainabsohail09@gmail.com</a>
-  </div>
+  Zainab Sohail · MSc AI, <span>FAU Erlangen-Nürnberg</span> · 2026
 </footer>
+
+<script>
+  // Active nav link highlight on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(a => a.classList.remove('active'));
+        const active = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  sections.forEach(s => observer.observe(s));
+</script>
 
 </body>
 </html>
