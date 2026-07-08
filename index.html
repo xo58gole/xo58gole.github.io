@@ -304,6 +304,8 @@
       gap: 0.5rem;
     }
     .aside-box li::before { content: '›'; color: var(--cyan); font-weight: 600; flex-shrink: 0; }
+    .aside-box li a { color: var(--cyan); transition: color .2s; }
+    .aside-box li a:hover { color: var(--cyan2); text-decoration: underline; }
     .stat-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -441,6 +443,25 @@
       border-radius: 6px;
       padding: 0.2rem 0.65rem;
     }
+    .project-links {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 1.25rem;
+    }
+    .project-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--cyan);
+      border: 1px solid var(--cyan-border);
+      border-radius: 999px;
+      padding: 0.35rem 0.95rem;
+      transition: background .2s, border-color .2s;
+    }
+    .project-links a:hover { background: var(--cyan-dim); border-color: var(--cyan); }
     /* ─── SKILLS ─── */
     .skills-grid {
       display: grid;
@@ -720,6 +741,12 @@
         </ul>
       </div>
       <div class="aside-box">
+        <h4>Reports</h4>
+        <ul>
+          <li><a href="reports/SAM-REF-Project-Report.pdf" download>SAM-REF Reproduction — Project Report (PDF)</a></li>
+        </ul>
+      </div>
+      <div class="aside-box">
         <h4>Currently Open To</h4>
         <ul>
           <li>Master's thesis at FAU research groups</li>
@@ -844,6 +871,13 @@
         <span class="tag">Reproducibility</span>
         <span class="tag">COCO</span>
         <span class="tag">Embedding Caching</span>
+      </div>
+      <div class="project-links">
+        <a href="reports/SAM-REF-Project-Report.pdf" download>
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Project Report (PDF)
+        </a>
+        <a href="https://github.com/xo58gole/SAM-REF-Reproduction" target="_blank">Code on GitHub →</a>
       </div>
     </div>
     <div class="project-card">
